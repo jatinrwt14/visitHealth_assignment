@@ -37,7 +37,7 @@ class UserAPI: NSObject {
       }
       
       guard let data = data else {
-        reject("Error, No data Found", nil)
+        reject("Error","Error, No data Found", nil)
         return
       }
       
@@ -69,7 +69,7 @@ class UserAPI: NSObject {
       }
       
       guard let data = data else {
-        reject("Error, No data Found", nil)
+        reject("Error", "Error, No data Found", nil)
         return
       }
       
