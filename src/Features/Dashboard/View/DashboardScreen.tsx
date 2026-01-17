@@ -22,6 +22,7 @@ function DashboardScreen({ navigation }: Props) {
   const [skip, setSkip] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const isSearching = searchQuery.trim().length > 0;
 
   useEffect(() => {
     loadUsers(true);
@@ -52,6 +53,7 @@ function DashboardScreen({ navigation }: Props) {
     setSearchQuery(text);
 
     if (!text.trim()) {
+      console.log("hiii")
       setFilteredUsers(users);
       return;
     }
@@ -62,7 +64,7 @@ function DashboardScreen({ navigation }: Props) {
         .toLowerCase()
         .includes(query)
     );
-
+    console.log(result)
     setFilteredUsers(result);
   };
 
@@ -83,7 +85,7 @@ function DashboardScreen({ navigation }: Props) {
       <FlatList
         data={filteredUsers}
         keyExtractor={item => item.id.toString()}
-        onEndReached={() => loadUsers()}
+        onEndReached={!isSearching ? () => loadUsers() : undefined}
         refreshing={refreshing}
         onRefresh={onRefresh}
         renderItem={({ item }) => (
